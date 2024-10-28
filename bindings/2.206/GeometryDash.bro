@@ -8171,7 +8171,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
 	virtual bool init() = win 0x1f7dd0, m1 0xe38c8, imac 0x102b70, ios 0x1e4484;
 	virtual void visit() = win 0x235f90, m1 0x127d48, imac 0x1581b0, ios 0x212c80;
 	virtual void postUpdate(float) = ios 0x2140e8;
-	virtual TodoReturn checkForEnd() = m1 0xdf6c8, imac 0xfd990, ios 0x2140ec;
+	virtual void checkForEnd() = m1 0xdf6c8, imac 0xfd990, ios 0x2140ec;
 	virtual TodoReturn testTime() = m1 0xdf6cc, imac 0xfd9a0, ios 0x2140f0;
 	virtual void updateVerifyDamage() = m1 0xdf6d0, imac 0xfd9b0, ios 0x2140f4;
 	virtual void updateAttemptTime(float) = m1 0xdf6d4, imac 0xfd9c0, ios 0x2140f8;
@@ -9405,7 +9405,7 @@ class GJGameState {
 	gd::map<std::pair<int, int>, int> m_unkMapPairIntIntInt;
 	unsigned int m_unkUint13;
 	cocos2d::CCPoint m_unkPoint32;
-	cocos2d::CCPoint m_unkPoint33;
+	cocos2d::CCPoint m_cameraPositionRelated;
 	bool m_unkBool20;
 	bool m_unkBool21;
 	bool m_unkBool22;
@@ -14586,7 +14586,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
 	static PlayerObject* create(int, int, GJBaseGameLayer*, cocos2d::CCLayer*, bool) = win 0x3648d0, m1 0x37c5c0, imac 0x403500, ios 0x227d30;
 
 	void activateStreak() = win 0x37e0a0, imac 0x40c550, m1 0x38447c;
-	TodoReturn addAllParticles() = win 0x3667D0;
+	void addAllParticles() = win 0x3667D0;
 	TodoReturn addToTouchedRings(RingObject*) = imac 0x41ecf0, m1 0x393d24;
 	TodoReturn addToYVelocity(double, int);
 	void animatePlatformerJump(float) = win 0x36adb0, m1 0x384c3c, imac 0x40cdb0;
@@ -14849,7 +14849,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
 	virtual void setColor(cocos2d::ccColor3B const&) = win 0x37b320, m1 0x397e20, imac 0x423230, ios 0x23c360;
 	virtual void setFlipX(bool) = win 0x3807a0, m1 0x39a480, imac 0x425c50, ios 0x23e02c;
 	virtual void setFlipY(bool) = imac 0x425cc0, ios 0x23e094;
-	virtual void resetObject() = m1 0x390ae4, imac 0x41b180, ios 0x236d38;
+	virtual void resetObject() = win 0x374f10, m1 0x390ae4, imac 0x41b180, ios 0x236d38;
 	virtual cocos2d::CCPoint getRealPosition() = m1 0x398604, imac 0x423a20, ios 0x23c9a4;
 	virtual OBB2D* getOrientedBox() = m1 0x3997ac, imac 0x424d80, ios 0x23d654;
 	virtual float getObjectRotation() = m1 0x3997d8, imac 0x424da0, ios 0x23d680;
@@ -15072,7 +15072,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
 	bool m_unkA99;
 	double m_totalTime;
 	bool m_isBeingSpawnedByDualPortal;
-	float m_unkAAC;
+	float m_waveTrailPulseRelated;
 	float m_unkAngle1;
 	float m_yVelocityRelated3;
 	bool m_gamevar0060;
@@ -15261,7 +15261,7 @@ class PlayLayer : GJBaseGameLayer, CCCircleWaveDelegate, CurrencyRewardDelegate,
 	virtual void onEnterTransitionDidFinish() = win 0x397920, m1 0xab0c4, imac 0xbfa80, ios 0x124fd4;
 	virtual void onExit() = win 0x397950, m1 0xab108, imac 0xbfab0, ios 0x125008;
 	virtual void postUpdate(float) = win 0x391460, imac 0xbbb10, m1 0xa7b08, ios 0x12214c;
-	virtual TodoReturn checkForEnd() = imac 0xbbe40, m1 0xa7dec, win 0x391830, ios 0x122420;
+	virtual void checkForEnd() = imac 0xbbe40, m1 0xa7dec, win 0x391830, ios 0x122420;
 	virtual TodoReturn testTime() = imac 0xc0010, m1 0xab568, ios 0x1253b4;
 	virtual void updateVerifyDamage() = imac 0xbbf30, m1 0xa7ee8, win 0x391a00, ios 0x122508;
 	virtual void updateAttemptTime(float) = win 0x391aa0, imac 0xbbfd0, m1 0xa7f98, ios 0x1225a4;
