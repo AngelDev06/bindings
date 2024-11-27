@@ -7771,7 +7771,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     virtual bool init() = win 0x201cc0, imac 0xfe730, m1 0xe0fb8, ios 0x1db7ec;
     virtual void visit() = win 0x240950, imac 0x152a70, m1 0x126ac4, ios 0x20a398;
     virtual void postUpdate(float) = m1 0x8fb0, imac 0x7150, ios 0xd590;
-    virtual TodoReturn checkForEnd() = m1 0x8fb0, imac 0x7150, ios 0xd590;
+    virtual void checkForEnd() = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual TodoReturn testTime() = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual void updateVerifyDamage() = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual void updateAttemptTime(float) = m1 0x8fb0, imac 0x7150, ios 0xd590;
@@ -9460,7 +9460,7 @@ class GJGameState {
     gd::map<std::pair<int, int>, int> m_unkMapPairIntIntInt;
     unsigned int m_unkUint13;
     cocos2d::CCPoint m_unkPoint32;
-    cocos2d::CCPoint m_unkPoint33;
+    cocos2d::CCPoint m_cameraPositionRelated;
     bool m_unkBool20;
     bool m_unkBool21;
     bool m_unkBool22;
@@ -14657,9 +14657,9 @@ class PlayerCheckpoint : cocos2d::CCNode {
 
     cocos2d::CCPoint m_position;
     cocos2d::CCPoint m_lastPosition;
-    int m_unkInt1;
+    float m_yVelocity;
     bool m_isUpsideDown;
-    bool m_unk7b3;
+    bool m_isSideways;
     bool m_isShip;
     bool m_isBall;
     bool m_isBird;
@@ -14668,22 +14668,27 @@ class PlayerCheckpoint : cocos2d::CCNode {
     bool m_isRobot;
     bool m_isSpider;
     bool m_isOnGround;
-    PAD = win 0x2;
+    PAD = win 0x2, android64 0x2;
     int m_hasGhostTrail;
-    std::array<uint8_t, 4> m_unkBytes1;
+    bool m_isMini;
     float m_speed;
     bool m_isHidden;
     bool m_isGoingLeft;
     std::array<uint8_t, 34> m_unkBytes2;
     bool m_hideAttemptCount;
-    std::array<uint8_t, 7> m_unkBytes3;
-    bool m_unkBool;
-    float m_unkFloat1;
-    int m_possiblyFlags;
-    int m_timeOrPercentRelated;
-    std::array<uint8_t, 4> m_unkBytes4;
-    gd::vector<float> m_yPositionVector;
-    std::array<uint8_t, 8> m_unkBytes5;
+    float m_maybeReverseSpeed;
+	bool m_isDashing;
+	float m_dashX;
+	float m_dashY;
+	float m_dashAngle;
+	float m_dashStartTime;
+	DashRingObject* m_dashRing;
+	PAD = win 0x8, android64 0x8;
+	double m_lastFlipTime;
+	float m_gravityMod;
+	bool m_decreaseBoostSlide;
+	int m_followRelated;
+	gd::vector<float> m_playerFollowFloats;
 }
 
 [[link(android)]]
@@ -15218,7 +15223,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
     bool m_unkA99;
     double m_totalTime;
     bool m_isBeingSpawnedByDualPortal;
-    float m_unkAAC;
+    float m_waveTrailPulseRelated;
     float m_unkAngle1;
     float m_yVelocityRelated3;
     bool m_gamevar0060;
@@ -15309,7 +15314,7 @@ class PlayLayer : GJBaseGameLayer, CCCircleWaveDelegate, CurrencyRewardDelegate,
     virtual void onEnterTransitionDidFinish() = win 0x3a4190, imac 0xbf710, m1 0xae0cc, ios 0x125f5c;
     virtual void onExit() = win 0x3a41c0, m1 0xae110, imac 0xbf740, ios 0x125f90;
     virtual void postUpdate(float) = win 0x39da60, imac 0xbb760, m1 0xaaab0, ios 0x123060;
-    virtual TodoReturn checkForEnd() = win 0x39de30, imac 0xbba90, m1 0xaad98, ios 0x123338;
+    virtual void checkForEnd() = win 0x39de30, imac 0xbba90, m1 0xaad98, ios 0x123338;
     virtual TodoReturn testTime() = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual void updateVerifyDamage() = win 0x39e000, imac 0xbbb80, m1 0xaae94, ios 0x123420;
     virtual void updateAttemptTime(float) = win 0x39e0f0, imac 0xbbc70, m1 0xaaf9c, ios 0x123510;
