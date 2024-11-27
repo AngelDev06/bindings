@@ -14512,9 +14512,9 @@ class PlayerCheckpoint : cocos2d::CCNode {
 
 	cocos2d::CCPoint m_position;
 	cocos2d::CCPoint m_lastPosition;
-	int m_unkInt1;
+	float m_yVelocity;
 	bool m_isUpsideDown;
-	bool m_unk7b3;
+	bool m_isSideways;
 	bool m_isShip;
 	bool m_isBall;
 	bool m_isBird;
@@ -14523,22 +14523,27 @@ class PlayerCheckpoint : cocos2d::CCNode {
 	bool m_isRobot;
 	bool m_isSpider;
 	bool m_isOnGround;
-	PAD = win 0x2;
+	PAD = win 0x2, android64 0x2;
 	int m_hasGhostTrail;
-	uint8_t m_unkBytes1[4];
+	bool m_isMini;
 	float m_speed;
 	bool m_isHidden;
 	bool m_isGoingLeft;
 	uint8_t m_unkBytes2[34];
 	bool m_hideAttemptCount;
-	uint8_t m_unkBytes3[7];
-	bool m_unkBool;
-	float m_unkFloat1;
-	int m_possiblyFlags;
-	int m_timeOrPercentRelated;
-	uint8_t m_unkBytes4[4];
-	gd::vector<float> m_yPositionVector;
-	uint8_t m_unkBytes5[8];
+	float m_maybeReverseSpeed;
+	bool m_isDashing;
+	float m_dashX;
+	float m_dashY;
+	float m_dashAngle;
+	float m_dashStartTime;
+	DashRingObject* m_dashRing;
+	PAD = win 0x8, android64 0x8;
+	double m_lastFlipTime;
+	float m_gravityMod;
+	bool m_decreaseBoostSlide;
+	int m_followRelated;
+	gd::vector<float> m_playerFollowFloats;
 }
 
 [[link(android)]]
@@ -14668,7 +14673,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
 		return m_playEffects && PlayLayer::get()->isFlipping();																			
 	}
 	TodoReturn levelWillFlip() = imac 0x40c6c0;
-	void loadFromCheckpoint(PlayerCheckpoint*) = win 0x37f9d0, imac 0x425520, m1 0x399e74;
+	void loadFromCheckpoint(PlayerCheckpoint* checkpoint) = win 0x37f9d0, imac 0x425520, m1 0x399e74;
 	void lockPlayer() = win 0x37d2e0, m1 0x3986a8, imac 0x423ad0;
 	TodoReturn logValues();
 	void modeDidChange() = imac 0x4201b0, m1 0x395100;
@@ -14725,7 +14730,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
 	}
 	void runNormalRotation(bool, float) = win 0x9999999, m1 0x381364, imac 0x408ef0;
 	void runRotateAction(bool, int) = win 0x36b480;
-	TodoReturn saveToCheckpoint(PlayerCheckpoint*);
+	void saveToCheckpoint(PlayerCheckpoint* checkpoint) = win 0x37f720;
 	void setSecondColor(cocos2d::ccColor3B const&) = win 0x37b3b0, m1 0x37fac8, imac 0x407090;
 	void setupStreak() = win 0x366920, m1 0x37e59c, imac 0x405810;
 	void setYVelocity(double velocity, int) = win 0x366e70 {
