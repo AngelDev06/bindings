@@ -8163,9 +8163,9 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
         }
         this->toggleGlitter(true);
     }
-    void switchToRobotMode(PlayerObject*, GameObject*, bool) = imac 0x113cd0;
-    void switchToRollMode(PlayerObject*, GameObject*, bool) = imac 0x113c20;
-    void switchToSpiderMode(PlayerObject*, GameObject*, bool) = imac 0x113d80, m1 0xf35b0;
+    void switchToRobotMode(PlayerObject* player, GameObject* portal, bool unused) = win 0x20d760, imac 0x113cd0;
+    void switchToRollMode(PlayerObject* player, GameObject* portal, bool unused) = win 0x20d940, imac 0x113c20;
+    void switchToSpiderMode(PlayerObject* player, GameObject* portal, bool unused) = win 0x20d850, imac 0x113d80, m1 0xf35b0;
     void syncBGTextures() = win 0x234a10, imac 0x147c70, m1 0x11dbd8;
     void teleportPlayer(TeleportPortalObject*, PlayerObject*) = win 0x20aa80, imac 0x110400, m1 0xf00d8;
     TodoReturn testInstantCountTrigger(int, int, int, bool, int, gd::vector<int> const&, int, int);
@@ -14746,14 +14746,14 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
     virtual void setColor(cocos2d::ccColor3B const&) = win 0x387580, m1 0x38612c, imac 0x408740, ios 0x22c9d0;
     virtual void setFlipX(bool) = win 0x38ca00, m1 0x3886b0, imac 0x40b040, ios 0x22e698;
     virtual void setFlipY(bool) = m1 0x388718, imac 0x40b0b0, ios 0x22e700;
-    virtual void resetObject() = m1 0x37ed44, imac 0x400590, ios 0x227340;
+    virtual void resetObject() = win 0x3810b0, m1 0x37ed44, imac 0x400590, ios 0x227340;
     virtual cocos2d::CCPoint getRealPosition() = imac 0x408f30, m1 0x386910, ios 0x22d014;
     virtual OBB2D* getOrientedBox() = imac 0x40a260, m1 0x387ab4, ios 0x22dcc0;
     virtual float getObjectRotation() = m1 0x387ae0, imac 0x40a280, ios 0x22dcec;
     virtual void animationFinished(char const*) = win 0x38cb10, imac 0x40b1e0, m1 0x3887fc, ios 0x22e720;
 
     void activateStreak() = win 0x38a300, imac 0x3f17c0, m1 0x3724d8;
-    TodoReturn addAllParticles() = win 0x372900;
+    void addAllParticles() = win 0x372900;
     TodoReturn addToTouchedRings(RingObject*) = imac 0x404180, m1 0x381fec;
     TodoReturn addToYVelocity(double, int);
     void animatePlatformerJump(float) = win 0x376ef0, imac 0x3f2020, m1 0x372c98;
